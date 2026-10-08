@@ -45,6 +45,7 @@ RUN mkdir -p /vt/vtdataroot && chown -R vitess:vitess /vt
 ENV VTROOT /vt
 ENV VTDATAROOT /vt/vtdataroot
 ENV PATH $VTROOT/bin:$PATH
+ENV MYSQL_SERVER_VERSION 8.4.6-Vitess
 
 # Copy artifacts from builder layer.
 COPY --from=builder --chown=vitess:vitess /vt/install /vt
@@ -56,4 +57,4 @@ USER vitess
 COPY docker/vttestserver/setup_vschema_folder.sh /vt/setup_vschema_folder.sh
 COPY docker/vttestserver/run.sh /vt/run.sh
 
-CMD /vt/run.sh "8.4.6-Vitess"
+ENTRYPOINT ["/vt/run.sh"]
